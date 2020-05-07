@@ -6,8 +6,6 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
-import PublicRoute from './helpers/PublicRoute';
-import PrivateRoute from './helpers/PrivateRoute';
 
 
 class App extends React.Component {
@@ -23,7 +21,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <Switch>
-                        <PublicRoute exact path={process.env.PUBLIC_URL + '/'} component={LandingPage} />
+                        <Route exact path={process.env.PUBLIC_URL + '/'} component={LandingPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
                 </BrowserRouter>

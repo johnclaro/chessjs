@@ -8,9 +8,9 @@ class Layout extends React.Component {
             <div>
                 <div className='container mb-3'>
                     <div className='text-center mb-5'>
-                        <span className='logo--text'>chess</span>
+                        <b>chess</b>
                         <span className='ml-3 mr-3'>by</span>
-                        <a href='https://www.johnclaro.com' className='logo--text'>johnclaro</a>
+                        <a href='https://www.johnclaro.com'>johnclaro</a>
                     </div>
                     {this.props.children}
                 </div>
