@@ -8,11 +8,11 @@ export default class Bishop extends Piece {
         super(player, (player === 1 ? WHITE_BISHOP : BLACK_BISHOP ))
     }
 
-    isMovePossible(source, destination) {
+    isValidMove(source, destination) {
         return (Math.abs(source - destination) % 9 === 0 || Math.abs(source - destination) % 7 === 0);
     }
 
-    getSourceToDestinationPath(source, destination) {
+    chessMove(source, destination) {
         let path = [], pathStart, pathEnd, incrementBy;
 
         if (source > destination) {

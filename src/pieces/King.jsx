@@ -8,7 +8,7 @@ export default class King extends Piece {
         super(player, (player === 1 ? WHITE_KING : BLACK_KING))
     }
 
-    isMovePossible(source, destination) {
+    isValidMove(source, destination) {
         return (source - 9 === destination ||
             source - 8 === destination ||
             source - 7 === destination ||
@@ -20,7 +20,7 @@ export default class King extends Piece {
         )
     }
 
-    getSourceToDestinationPath(source, destination) {
+    chessMove(source, destination) {
         return []
     }
 }

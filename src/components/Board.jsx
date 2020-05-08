@@ -8,8 +8,8 @@ class Board extends React.Component {
     renderSquare(index, shade) {
         return <Square
             key={index}
-            piece={this.props.squares[index]}
-            style={this.props.squares[index] ? this.props.squares[index].style : null}
+            piece={this.props.board[index]}
+            style={this.props.board[index] ? this.props.board[index].style : null}
             shade={shade}
             onClick={() => this.props.onClick(index)}
         />

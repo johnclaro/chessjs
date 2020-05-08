@@ -13,7 +13,7 @@ class Pawn extends Piece {
         }
     }
 
-    isMovePossible(source, destination, isDestinationEnemyOccupied) {
+    isValidMove(source, destination, isDestinationEnemyOccupied) {
         if(this.player === 1) {
             if ((destination === source - 8 && !isDestinationEnemyOccupied) || (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1)) {
                 return true;
@@ -31,7 +31,7 @@ class Pawn extends Piece {
         }
     }
 
-    getSourceToDestinationPath(source, destination) {
+    chessMove(source, destination) {
         if (destination === source - 16) {
             return [source - 8];
         } else if (destination === source + 16) {

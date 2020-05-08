@@ -9,83 +9,84 @@ class Game extends React.Component {
     constructor() {
         super();
         this.state = {
-            squares: initBoard(),
+            board: initBoard(),
             capturedWhites: [],
             capturedBlacks: [],
             player: 1,
-            sourceSelection: -1,
+            target: -1,
             status: '',
             turn: 'white'
         }
     }
 
-    handleClick(index) {
-        const squares = this.state.squares.slice();
+    handleClick(location) {
+        const board = this.state.board.slice();
+        const target = this.state.target;
+        const piece = board[location];
 
-        if (this.state.sourceSelection === -1) {
-            if (!squares[index] || squares[index].player !== this.state.player) {
+        if (target === -1) {
+            if (!piece || piece.player !== this.state.player) {
                 this.setState({
                     status: `Wrong selection. Choose player ${this.state.player} pieces.`
                 })
-                // squares[index] ? delete squares[index].style.backgroundColor : null;
+                // piece ? delete piece.style.backgroundColor : null;
             } else {
-                squares[index].style = {...squares[index].style, backgroundColor: 'RGB(111,143,114)'}
+                piece.style = {...piece.style, backgroundColor: 'RGB(111,143,114)'}
                 this.setState({
                     status: 'Choose destination for the selected piece',
-                    sourceSelection: index
+                    target: location
                 })
             }
-        } else if (this.state.sourceSelection > -1) {
-            // squares[this.state.sourceSelection].style.backgroundColor;
-            if (squares[index] && squares[index].player === this.state.player) {
+        } else if (target > -1) {
+            // board[target].style.backgroundColor;
+            if (piece && piece.player === this.state.player) {
                 this.setState({
                     status: 'Wrong selection. Choose valid source and destination again.',
-                    sourceSelection: -1
+                    target: -1
                 })
             } else {
-                const squares = this.state.squares.slice();
                 const capturedWhites = this.state.capturedWhites.slice();
                 const capturedBlacks = this.state.capturedBlacks.slice();
-                const isDestinationEnemyOccupied = squares[index] ? true : false; 
-                const isMovePossible = squares[this.state.sourceSelection].isMovePossible(this.state.sourceSelection, index, isDestinationEnemyOccupied);
-                const sourceToDestinationPath = squares[this.state.sourceSelection].getSourceToDestinationPath(this.state.sourceSelection, index);
-                const isMoveLegal = this.isMoveLegal(sourceToDestinationPath);
+                const isTargetEnemy = piece ? true : false; 
+                const isValidMove = board[target].isValidMove(target, location, isTargetEnemy);
+                const move = board[target].chessMove(target, location);
+                const isChessMove = this.isChessMove(move);
         
-                if (isMovePossible && isMoveLegal) {
-                    if (squares[index] !== null) {
-                        if (squares[index].player === 1) {
-                            capturedWhites.push(squares[index]);
+                if (isValidMove && isChessMove) {
+                    if (piece !== null) {
+                        if (piece.player === 1) {
+                            capturedWhites.push(piece);
                         } else {
-                            capturedBlacks.push(squares[index]);
+                            capturedBlacks.push(piece);
                         }
                     }
-                    squares[index] = squares[this.state.sourceSelection];
-                    squares[this.state.sourceSelection] = null;
+                    board[location] = board[target];
+                    board[target] = null;
                     let player = this.state.player === 1 ? 2 : 1;
-                    let turn = this.state.turn === 'white'? 'black' : 'white';
+                    let turn = this.state.turn === 'white' ? 'black' : 'white';
                     this.setState({
-                        sourceSelection: -1,
-                        squares: squares,
-                        capturedWhites: capturedWhites,
-                        capturedBlacks: capturedBlacks,
-                        player: player,
+                        target: -1,
+                        board: board,
                         status: '',
-                        turn: turn
+                        capturedWhites,
+                        capturedBlacks,
+                        player,
+                        turn
                     });
                 } else {
                     this.setState({
-                        status: 'Wrong selection. Choose valid source and destination again.',
-                        sourceSelection: -1
+                        status: 'Wrong location. Choose valid source and destination again.',
+                        target: -1
                     })
                 }
             }
         }
     }
 
-    isMoveLegal(sourceToDestinationPath) {
+    isChessMove(move) {
         let isLegal = true;
-        for (let index = 0; index < sourceToDestinationPath.length; index++) {
-            if (this.state.squares[sourceToDestinationPath[index]] !== null) {
+        for (let location = 0; location < move.length; location++) {
+            if (this.state.board[move[location]] !== null) {
                 isLegal = false;
             }
         }
@@ -98,8 +99,8 @@ class Game extends React.Component {
                 <div className='game'>
                     <div className='game-board'>
                         <Board
-                            squares={this.state.squares}
-                            onClick={(index) => this.handleClick(index)}
+                            board={this.state.board}
+                            onClick={(location) => this.handleClick(location)}
                         />
                     </div>
                     <div className='game-info'>
