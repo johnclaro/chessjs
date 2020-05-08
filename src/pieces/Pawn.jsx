@@ -3,7 +3,7 @@ import Piece from './Piece';
 import { WHITE_PAWN, BLACK_PAWN } from '../constants/pieces';
 
 
-export default class Pawn extends Piece {
+class Pawn extends Piece {
 
     constructor(player) {
         super(player, (player === 1 ? WHITE_PAWN : BLACK_PAWN))
@@ -31,7 +31,7 @@ export default class Pawn extends Piece {
         }
     }
 
-    getSourceToDestinationath(source, destination) {
+    getSourceToDestinationPath(source, destination) {
         if (destination === source - 16) {
             return [source - 8];
         } else if (destination === source + 16) {
@@ -41,3 +41,5 @@ export default class Pawn extends Piece {
         }
     }
 }
+
+export default Pawn;

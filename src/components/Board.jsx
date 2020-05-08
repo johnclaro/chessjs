@@ -6,7 +6,6 @@ import Square from './Square';
 class Board extends React.Component {
 
     renderSquare(index, shade) {
-        console.log(this.props.squares[index])
         return <Square
             key={index}
             piece={this.props.squares[index]}

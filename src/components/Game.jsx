@@ -37,7 +37,8 @@ class Game extends React.Component {
                 })
             }
         } else if (this.state.sourceSelection > -1) {
-            delete squares[this.state.sourceSelection].style.backgroundColor;
+            // console.log(squares[this.state.sourceSelection].style)
+            // delete squares[this.state.sourceSelection].style.backgroundColor;
             if (squares[index] && squares[index].player === this.state.player) {
                 this.setState({
                     status: 'Wrong selection. Choose valid source and destination again.',
@@ -47,10 +48,11 @@ class Game extends React.Component {
                 const squares = this.state.squares.slice();
                 const whiteFallenSoldiers = this.state.whiteFallenSoldiers.slice();
                 const blackFallenSoldiers = this.state.blackFallenSoldiers.slice();
-                const isDestEnemyOccupied = squares[index] ? true : false; 
-                const isMovePossible = squares[this.state.sourceSelection].isMovePossible(this.state.sourceSelection, index, isDestEnemyOccupied);
-                const srcToDestPath = squares[this.state.sourceSelection].getSrcToDestPath(this.state.sourceSelection, index);
-                const isMoveLegal = this.isMoveLegal(srcToDestPath);
+                const isDestinationEnemyOccupied = squares[index] ? true : false; 
+                const isMovePossible = squares[this.state.sourceSelection].isMovePossible(this.state.sourceSelection, index, isDestinationEnemyOccupied);
+                console.log(squares[this.state.sourceSelection])
+                const sourceToDestinationPath = squares[this.state.sourceSelection].getSourceToDestinationPath(this.state.sourceSelection, index);
+                const isMoveLegal = this.isMoveLegal(sourceToDestinationPath);
         
                 if (isMovePossible && isMoveLegal) {
                     if (squares[index] !== null) {

@@ -6,6 +6,7 @@ class CapturedPiece extends React.Component {
 
     renderSquare(square, index, shade) {
         return <Square
+            key={index}
             piece={square}
             style={square.style}
         />
