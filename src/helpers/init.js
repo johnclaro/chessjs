@@ -9,7 +9,7 @@ import Rook from '../pieces/Rook';
 export default function initBoard() {
     const squares = Array(64).fill(null);
 
-    for (let index=0; index < 16; index++) {
+    for (let index = 8; index < 16; index++) {
         squares[index] = new Pawn(2);
         squares[index + 40] = new Pawn(1);
     }
