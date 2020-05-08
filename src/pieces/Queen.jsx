@@ -1,6 +1,9 @@
 import { WHITE_QUEEN, BLACK_QUEEN } from '../constants/pieces';
 
-export default class Queen {
+import Piece from './Piece';
+
+
+export default class Queen extends Piece {
     constructor(player) {
         super(player, (player === 1 ? WHITE_QUEEN : BLACK_QUEEN ))
     }

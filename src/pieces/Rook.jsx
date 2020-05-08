@@ -11,7 +11,7 @@ export default class Rook extends Piece {
     isMovePossible(source, destination) {
         let modulo = source % 8;
         let difference = 8 - modulo;
-        return (Math.abs(source - desination) % 8 === 0 || (destination >= (source - modulo) && destination < (source + difference)));
+        return (Math.abs(source - destination) % 8 === 0 || (destination >= (source - modulo) && destination < (source + difference)));
     }
 
     getSourceToDestinationPath(source, destination) {
