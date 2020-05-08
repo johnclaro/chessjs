@@ -35,7 +35,7 @@ class Game extends React.Component {
                     piece.style = {...piece.style, backgroundColor: ''};
                 }
             } else {
-                piece.style = {...piece.style, backgroundColor: 'RGB(111,143,114)'}
+                piece.style = {...piece.style, backgroundColor: '#F7EC7A'}
                 this.setState({
                     status: 'Choose destination for the selected piece',
                     target: location
