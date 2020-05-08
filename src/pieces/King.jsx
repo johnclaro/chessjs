@@ -8,7 +8,7 @@ export default class King extends Piece {
         super(player, (player === 1 ? WHITE_KING : BLACK_KING))
     }
 
-    isValidMove(source, destination) {
+    isChessMove(source, destination) {
         return (source - 9 === destination ||
             source - 8 === destination ||
             source - 7 === destination ||

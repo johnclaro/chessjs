@@ -13,7 +13,7 @@ class Pawn extends Piece {
         }
     }
 
-    isValidMove(source, destination, isDestinationEnemyOccupied) {
+    isChessMove(source, destination, isDestinationEnemyOccupied) {
         if(this.player === 1) {
             if ((destination === source - 8 && !isDestinationEnemyOccupied) || (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1)) {
                 return true;

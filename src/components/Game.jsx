@@ -47,12 +47,12 @@ class Game extends React.Component {
             } else {
                 const capturedWhites = this.state.capturedWhites.slice();
                 const capturedBlacks = this.state.capturedBlacks.slice();
-                const isTargetEnemy = piece ? true : false; 
-                const isValidMove = board[target].isValidMove(target, location, isTargetEnemy);
                 const move = board[target].chessMove(target, location);
-                const isChessMove = this.isChessMove(move);
+                const isTargetEnemy = piece ? true : false; 
+                const isChessMove = board[target].isChessMove(target, location, isTargetEnemy);
+                const isValidMove = this.isValidMove(move);
         
-                if (isValidMove && isChessMove) {
+                if (isChessMove && isValidMove) {
                     if (piece !== null) {
                         if (piece.player === 1) {
                             capturedWhites.push(piece);
@@ -83,14 +83,14 @@ class Game extends React.Component {
         }
     }
 
-    isChessMove(move) {
-        let isLegal = true;
+    isValidMove(move) {
+        let isValid = true;
         for (let location = 0; location < move.length; location++) {
             if (this.state.board[move[location]] !== null) {
-                isLegal = false;
+                isValid = false;
             }
         }
-        return isLegal;
+        return isValid;
     }
     
     render() {

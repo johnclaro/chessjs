@@ -8,7 +8,7 @@ export default class Queen extends Piece {
         super(player, (player === 1 ? WHITE_QUEEN : BLACK_QUEEN ))
     }
 
-    isValidMove(source, destination) {
+    isChessMove(source, destination) {
         let modulo = source % 8;
         let difference = 8 - modulo
 

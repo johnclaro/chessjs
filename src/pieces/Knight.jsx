@@ -9,7 +9,7 @@ export default class Knight extends Piece {
         super(player, (player === 1 ? WHITE_KNIGHT : BLACK_KNIGHT ));
     }
 
-    isValidMove(source, destination) {
+    isChessMove(source, destination) {
         return (source - 17 === destination ||
             source - 10 === destination ||
             source + 6 === destination ||

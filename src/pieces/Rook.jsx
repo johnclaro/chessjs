@@ -8,7 +8,7 @@ export default class Rook extends Piece {
         super(player, (player === 1 ? WHITE_ROOK : BLACK_ROOK ))
     }
 
-    isValidMove(source, destination) {
+    isChessMove(source, destination) {
         let modulo = source % 8;
         let difference = 8 - modulo;
         return (Math.abs(source - destination) % 8 === 0 || (destination >= (source - modulo) && destination < (source + difference)));

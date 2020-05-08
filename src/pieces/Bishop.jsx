@@ -8,7 +8,7 @@ export default class Bishop extends Piece {
         super(player, (player === 1 ? WHITE_BISHOP : BLACK_BISHOP ))
     }
 
-    isValidMove(source, destination) {
+    isChessMove(source, destination) {
         return (Math.abs(source - destination) % 9 === 0 || Math.abs(source - destination) % 7 === 0);
     }
 
