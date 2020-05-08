@@ -7,7 +7,6 @@ import { logout } from '../actions/auth';
 class Logout extends Component {
     
     onClick = () => {
-        console.log('Cliked!')
         this.props.logout();
     }
 

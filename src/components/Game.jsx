@@ -10,8 +10,8 @@ class Game extends React.Component {
         super();
         this.state = {
             squares: initBoard(),
-            whiteFallenSoldiers: [],
-            blackFallenSoldiers: [],
+            capturedWhites: [],
+            capturedBlacks: [],
             player: 1,
             sourceSelection: -1,
             status: '',
@@ -27,7 +27,6 @@ class Game extends React.Component {
                 this.setState({
                     status: `Wrong selection. Choose player ${this.state.player} pieces.`
                 })
-                console.log(`TODO: ${squares[index]}`)
                 // squares[index] ? delete squares[index].style.backgroundColor : null;
             } else {
                 squares[index].style = {...squares[index].style, backgroundColor: 'RGB(111,143,114)'}
@@ -37,8 +36,7 @@ class Game extends React.Component {
                 })
             }
         } else if (this.state.sourceSelection > -1) {
-            // console.log(squares[this.state.sourceSelection].style)
-            // delete squares[this.state.sourceSelection].style.backgroundColor;
+            // squares[this.state.sourceSelection].style.backgroundColor;
             if (squares[index] && squares[index].player === this.state.player) {
                 this.setState({
                     status: 'Wrong selection. Choose valid source and destination again.',
@@ -46,24 +44,21 @@ class Game extends React.Component {
                 })
             } else {
                 const squares = this.state.squares.slice();
-                const whiteFallenSoldiers = this.state.whiteFallenSoldiers.slice();
-                const blackFallenSoldiers = this.state.blackFallenSoldiers.slice();
+                const capturedWhites = this.state.capturedWhites.slice();
+                const capturedBlacks = this.state.capturedBlacks.slice();
                 const isDestinationEnemyOccupied = squares[index] ? true : false; 
                 const isMovePossible = squares[this.state.sourceSelection].isMovePossible(this.state.sourceSelection, index, isDestinationEnemyOccupied);
-                console.log(squares[this.state.sourceSelection])
                 const sourceToDestinationPath = squares[this.state.sourceSelection].getSourceToDestinationPath(this.state.sourceSelection, index);
                 const isMoveLegal = this.isMoveLegal(sourceToDestinationPath);
         
                 if (isMovePossible && isMoveLegal) {
                     if (squares[index] !== null) {
                         if (squares[index].player === 1) {
-                            whiteFallenSoldiers.push(squares[index]);
+                            capturedWhites.push(squares[index]);
                         } else {
-                            blackFallenSoldiers.push(squares[index]);
+                            capturedBlacks.push(squares[index]);
                         }
                     }
-                    console.log("whiteFallenSoldiers", whiteFallenSoldiers) ;
-                    console.log("blackFallenSoldiers", blackFallenSoldiers);
                     squares[index] = squares[this.state.sourceSelection];
                     squares[this.state.sourceSelection] = null;
                     let player = this.state.player === 1 ? 2 : 1;
@@ -71,8 +66,8 @@ class Game extends React.Component {
                     this.setState({
                         sourceSelection: -1,
                         squares: squares,
-                        whiteFallenSoldiers: whiteFallenSoldiers,
-                        blackFallenSoldiers: blackFallenSoldiers,
+                        capturedWhites: capturedWhites,
+                        capturedBlacks: capturedBlacks,
                         player: player,
                         status: '',
                         turn: turn
@@ -111,11 +106,11 @@ class Game extends React.Component {
                         <h3>Turn</h3>
                         <div id='player-turn-box' style={{backgroundColor: this.state.turn}}></div>
                         <div className='game-status'>{this.state.status}</div>
-                        <div className='fallen-soldier-block'>
+                        <div className='captured-piece-block'>
                             {
                                 <CapturedPiece
-                                    whiteFallenSoldiers={this.state.whiteFallenSoldiers}
-                                    blackFallenSoldiers={this.state.blackFallenSoldiers}
+                                    capturedWhites={this.state.capturedWhites}
+                                    capturedBlacks={this.state.capturedBlacks}
                                 />
                             }
                         </div>

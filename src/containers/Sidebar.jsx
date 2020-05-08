@@ -30,10 +30,6 @@ class Sidebar extends React.Component {
         ]
     }
 
-    activatePage() {
-        console.log('Activating page...')
-    }
-
     render() {
         const { links } = this.state;
         const pathname = window.location.pathname;

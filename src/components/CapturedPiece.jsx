@@ -16,12 +16,12 @@ class CapturedPiece extends React.Component {
         return (
             <div>
                 <div className='board-row'>
-                    {this.props.whiteFallenSoldiers.map((white, index) =>
+                    {this.props.capturedWhites.map((white, index) =>
                         this.renderSquare(white, index)
                     )}
                 </div>
                 <div className='board-row'>
-                    {this.props.blackFallenSoldiers.map((black, index) =>
+                    {this.props.capturedBlacks.map((black, index) =>
                         this.renderSquare(black, index)
                     )}
                 </div>
