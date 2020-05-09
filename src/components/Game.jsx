@@ -17,13 +17,13 @@ class Game extends React.Component {
             status: '',
             turn: 'white',
             previousSource: '',
-            previousSource: ''
+            previousDestination: ''
         }
     }
 
     handleClick(destination) {
         const board = this.state.board.slice();
-        const source = this.state.source;
+        const { previousDestination, previousSource, source } = this.state;
         const piece = board[destination];
         const chosenSource = source === -1;
         const validSource = source > -1;
@@ -54,13 +54,11 @@ class Game extends React.Component {
                 const capturedWhites = this.state.capturedWhites.slice();
                 const capturedBlacks = this.state.capturedBlacks.slice();
                 const move = board[source].chessMove(source, destination);
-                const isSourceEnemy = piece ? true : false; 
-                const isChessMove = board[source].isChessMove(source, destination, isSourceEnemy);
+                const doesDestinationHaveEnemyPiece = piece ? true : false; 
+                const isChessMove = board[source].isChessMove(source, destination, doesDestinationHaveEnemyPiece);
                 const isValidMove = this.isValidMove(move);
         
                 if (isChessMove && isValidMove) {
-                    console.log(`Source: ${source}`)
-                    console.log(`Destination: ${destination}`)
                     if (piece !== null) {
                         if (piece.player === 1) {
                             capturedWhites.push(piece);
@@ -76,7 +74,8 @@ class Game extends React.Component {
                         source: -1,
                         board: board,
                         status: '',
-                        previousSource: destination,
+                        previousSource: source,
+                        previousDestination: destination,
                         capturedWhites,
                         capturedBlacks,
                         player,
