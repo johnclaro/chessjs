@@ -42,9 +42,11 @@ class Pawn extends Piece {
     }
 
     chessMove(source, destination) {
-        if (destination === source - 16) {
+        const white_advanced_twice = destination === source - 16;
+        const black_advanced_twice = destination === source + 16;
+        if (white_advanced_twice) {
             return [source - 8];
-        } else if (destination === source + 16) {
+        } else if (black_advanced_twice) {
             return [source + 8];
         } else {
             return [];
