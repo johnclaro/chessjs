@@ -17,7 +17,7 @@ class Game extends React.Component {
             status: '',
             turn: 'white',
             previousSource: '',
-            previousDestination: ''
+            previousTarget: ''
         }
     }
 
@@ -25,10 +25,10 @@ class Game extends React.Component {
         const board = this.state.board.slice();
         const target = this.state.target;
         const piece = board[location];
-        const invalidTarget = target === -1;
+        const chosenTarget = target === -1;
         const validTarget = target > -1;
 
-        if (invalidTarget) {
+        if (chosenTarget) {
             if (!piece || piece.player !== this.state.player) {
                 this.setState({
                     status: `Wrong selection. Choose player ${this.state.player} pieces.`
@@ -40,7 +40,7 @@ class Game extends React.Component {
                 piece.style = {...piece.style, backgroundColor: '#DAC350'}
                 this.setState({
                     status: 'Choose destination for the selected piece',
-                    target: location
+                    target: location,
                 })
             }
         } else if (validTarget) {
@@ -74,6 +74,7 @@ class Game extends React.Component {
                         target: -1,
                         board: board,
                         status: '',
+                        previousTarget: location,
                         capturedWhites,
                         capturedBlacks,
                         player,
