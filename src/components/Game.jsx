@@ -72,8 +72,6 @@ class Game extends React.Component {
                         source: -1,
                         board: board,
                         status: '',
-                        previousSource: source,
-                        previousDestination: destination,
                         capturedWhites,
                         capturedBlacks,
                         player,
