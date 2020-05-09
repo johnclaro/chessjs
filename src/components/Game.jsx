@@ -13,22 +13,22 @@ class Game extends React.Component {
             capturedWhites: [],
             capturedBlacks: [],
             player: 1,
-            target: -1,
+            source: -1,
             status: '',
             turn: 'white',
             previousSource: '',
-            previousTarget: ''
+            previousSource: ''
         }
     }
 
-    handleClick(location) {
+    handleClick(destination) {
         const board = this.state.board.slice();
-        const target = this.state.target;
-        const piece = board[location];
-        const chosenTarget = target === -1;
-        const validTarget = target > -1;
+        const source = this.state.source;
+        const piece = board[destination];
+        const chosenSource = source === -1;
+        const validSource = source > -1;
 
-        if (chosenTarget) {
+        if (chosenSource) {
             if (!piece || piece.player !== this.state.player) {
                 this.setState({
                     status: `Wrong selection. Choose player ${this.state.player} pieces.`
@@ -40,25 +40,27 @@ class Game extends React.Component {
                 piece.style = {...piece.style, backgroundColor: '#DAC350'}
                 this.setState({
                     status: 'Choose destination for the selected piece',
-                    target: location,
+                    source: destination,
                 })
             }
-        } else if (validTarget) {
-            board[target].style = {...board[target].style, backgroundColor: '#F7EC7A'};
+        } else if (validSource) {
+            board[source].style = {...board[source].style, backgroundColor: '#F7EC7A'};
             if (piece && piece.player === this.state.player) {
                 this.setState({
                     status: 'Wrong selection. Choose valid source and destination again.',
-                    target: -1
+                    source: -1
                 })
             } else {
                 const capturedWhites = this.state.capturedWhites.slice();
                 const capturedBlacks = this.state.capturedBlacks.slice();
-                const move = board[target].chessMove(target, location);
-                const isTargetEnemy = piece ? true : false; 
-                const isChessMove = board[target].isChessMove(target, location, isTargetEnemy);
+                const move = board[source].chessMove(source, destination);
+                const isSourceEnemy = piece ? true : false; 
+                const isChessMove = board[source].isChessMove(source, destination, isSourceEnemy);
                 const isValidMove = this.isValidMove(move);
         
                 if (isChessMove && isValidMove) {
+                    console.log(`Source: ${source}`)
+                    console.log(`Destination: ${destination}`)
                     if (piece !== null) {
                         if (piece.player === 1) {
                             capturedWhites.push(piece);
@@ -66,15 +68,15 @@ class Game extends React.Component {
                             capturedBlacks.push(piece);
                         }
                     }
-                    board[location] = board[target];
-                    board[target] = null;
+                    board[destination] = board[source];
+                    board[source] = null;
                     let player = this.state.player === 1 ? 2 : 1;
                     let turn = this.state.turn === 'white' ? 'black' : 'white';
                     this.setState({
-                        target: -1,
+                        source: -1,
                         board: board,
                         status: '',
-                        previousTarget: location,
+                        previousSource: destination,
                         capturedWhites,
                         capturedBlacks,
                         player,
@@ -82,8 +84,8 @@ class Game extends React.Component {
                     });
                 } else {
                     this.setState({
-                        status: 'Wrong location. Choose valid source and destination again.',
-                        target: -1
+                        status: 'Wrong destination. Choose valid source and destination again.',
+                        source: -1
                     })
                 }
             }
@@ -92,8 +94,8 @@ class Game extends React.Component {
 
     isValidMove(move) {
         let isValid = true;
-        for (let location = 0; location < move.length; location++) {
-            if (this.state.board[move[location]] !== null) {
+        for (let destination = 0; destination < move.length; destination++) {
+            if (this.state.board[move[destination]] !== null) {
                 isValid = false;
             }
         }
@@ -107,7 +109,7 @@ class Game extends React.Component {
                     <div className='game-board'>
                         <Board
                             board={this.state.board}
-                            onClick={(location) => this.handleClick(location)}
+                            onClick={(destination) => this.handleClick(destination)}
                         />
                     </div>
                     <div className='game-info'>
