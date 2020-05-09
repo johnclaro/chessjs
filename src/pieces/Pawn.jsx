@@ -13,30 +13,30 @@ class Pawn extends Piece {
         }
     }
 
-    isChessMove(source, destination, isDestinationEnemyOccupied) {
+    isChessMove(source, destination, enemyPiece) {
         const white = this.player === 1;
         const black = this.player === 2;
 
         if (white) {
-            const advanceOneSquare = (destination === source - 8 && !isDestinationEnemyOccupied)
-            const advanceTwoSquares =  (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1 && !isDestinationEnemyOccupied)
+            const advanceOneSquare = (destination === source - 8 && !enemyPiece)
+            const advanceTwoSquares =  (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1 && !enemyPiece)
             const leftCapture = destination === source - 9
             const rightCapture = destination === source - 7
 
             if (advanceOneSquare || advanceTwoSquares) {
                 return true;
-            } else if (isDestinationEnemyOccupied && (leftCapture || rightCapture)) {
+            } else if (enemyPiece && (leftCapture || rightCapture)) {
                 return true;
             }
         } else if (black) {
-            const advanceOneSquare = (destination === source + 8 && !isDestinationEnemyOccupied);
-            const advanceTwoSquares = (destination === source + 16 && this.initialPositions[2].indexOf(source) !== 1 && !isDestinationEnemyOccupied)
+            const advanceOneSquare = (destination === source + 8 && !enemyPiece);
+            const advanceTwoSquares = (destination === source + 16 && this.initialPositions[2].indexOf(source) !== 1 && !enemyPiece)
             const leftCapture = destination === source + 9;
             const rightCapture = destination === source + 7;
 
             if (advanceOneSquare || advanceTwoSquares) {
                 return true;
-            } else if (isDestinationEnemyOccupied && (leftCapture || rightCapture)) {
+            } else if (enemyPiece && (leftCapture || rightCapture)) {
                 return true;
             }
         } else {
@@ -45,11 +45,11 @@ class Pawn extends Piece {
     }
 
     chessMove(source, destination) {
-        const white_advanced_twice = destination === source - 16;
-        const black_advanced_twice = destination === source + 16;
-        if (white_advanced_twice) {
+        const whiteAdvanceTwoSquares = destination === source - 16;
+        const blackAdvanceTwoSquares = destination === source + 16;
+        if (whiteAdvanceTwoSquares) {
             return [source - 8];
-        } else if (black_advanced_twice) {
+        } else if (blackAdvanceTwoSquares) {
             return [source + 8];
         } else {
             return [];
