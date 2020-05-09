@@ -33,7 +33,7 @@ export default function initBoard() {
     squares[4] = new King(2);
 
     squares[59] = new Queen(1);
-    squares[60] = new Knight(1);
+    squares[60] = new King(1);
 
     return squares;
 }
