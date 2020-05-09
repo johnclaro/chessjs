@@ -16,14 +16,12 @@ class Game extends React.Component {
             source: -1,
             status: '',
             turn: 'white',
-            previousSource: '',
-            previousDestination: ''
         }
     }
 
     handleClick(destination) {
         const board = this.state.board.slice();
-        const { previousDestination, previousSource, source } = this.state;
+        const { source } = this.state;
         const piece = board[destination];
         const chosenSource = source === -1;
         const validSource = source > -1;
@@ -44,7 +42,7 @@ class Game extends React.Component {
                 })
             }
         } else if (validSource) {
-            board[source].style = {...board[source].style, backgroundColor: '#F7EC7A'};
+            board[source].style = {...board[source].style, backgroundColor: ''};
             if (piece && piece.player === this.state.player) {
                 this.setState({
                     status: 'Wrong selection. Choose valid source and destination again.',
