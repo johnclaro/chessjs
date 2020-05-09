@@ -14,16 +14,26 @@ class Pawn extends Piece {
     }
 
     isChessMove(source, destination, isDestinationEnemyOccupied) {
-        if(this.player === 1) {
-            if ((destination === source - 8 && !isDestinationEnemyOccupied) || (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1)) {
+        if (this.player === 1) {
+            const moved_one = (destination === source - 8 && !isDestinationEnemyOccupied)
+            const moved_two =  (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1)
+            const left_capture = destination === source - 9
+            const right_capture = destination === source - 7
+
+            if (moved_one || moved_two) {
                 return true;
-            } else if (isDestinationEnemyOccupied && (destination === source - 9 || destination === source - 7)) {
+            } else if (isDestinationEnemyOccupied && (left_capture || right_capture)) {
                 return true;
             }
         } else if (this.player === 2) {
-            if ((destination === source + 8 && !isDestinationEnemyOccupied) || (destination === source + 16 && this.initialPositions[2].indexOf(source) !== 1)) {
+            const moved_one = (destination === source + 8 && !isDestinationEnemyOccupied);
+            const moved_two = (destination === source + 16 && this.initialPositions[2].indexOf(source) !== 1)
+            const left_capture = destination === source + 9;
+            const right_capture = destination === source + 7;
+
+            if (moved_one || moved_two) {
                 return true;
-            } else if (isDestinationEnemyOccupied && (destination === source + 9 || destination === source + 7)) {
+            } else if (isDestinationEnemyOccupied && (left_capture || right_capture)) {
                 return true;
             }
         } else {
