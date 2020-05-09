@@ -16,7 +16,7 @@ class Pawn extends Piece {
     isChessMove(source, destination, isDestinationEnemyOccupied) {
         if (this.player === 1) {
             const advance_once = (destination === source - 8 && !isDestinationEnemyOccupied)
-            const advance_twice =  (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1)
+            const advance_twice =  (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1 && !isDestinationEnemyOccupied)
             const left_capture = destination === source - 9
             const right_capture = destination === source - 7
 
@@ -27,7 +27,7 @@ class Pawn extends Piece {
             }
         } else if (this.player === 2) {
             const advance_once = (destination === source + 8 && !isDestinationEnemyOccupied);
-            const advance_twice = (destination === source + 16 && this.initialPositions[2].indexOf(source) !== 1)
+            const advance_twice = (destination === source + 16 && this.initialPositions[2].indexOf(source) !== 1 && !isDestinationEnemyOccupied)
             const left_capture = destination === source + 9;
             const right_capture = destination === source + 7;
 
