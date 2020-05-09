@@ -13,25 +13,25 @@ export default class Bishop extends Piece {
     }
 
     chessMove(source, destination) {
-        let path = [], pathStart, pathEnd, incrementBy;
+        let path = [], start, end, increment;
 
         if (source > destination) {
-            pathStart = destination;
-            pathEnd = source;
+            start = destination;
+            end = source;
         } else {
-            pathStart = source;
-            pathEnd = destination;
+            start = source;
+            end = destination;
         }
 
         if (Math.abs(source - destination) % 9 === 0) {
-            incrementBy = 9;
-            pathStart += 9;
+            increment = 9;
+            start += 9;
         } else {
-            incrementBy = 7;
-            pathStart += 7;
+            increment = 7;
+            start += 7;
         }
 
-        for (let index = pathStart; index < pathEnd; index+=incrementBy) {
+        for (let index = start; index < end; index+=increment) {
             path.push(index);
         }
 

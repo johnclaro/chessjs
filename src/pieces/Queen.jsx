@@ -17,31 +17,31 @@ export default class Queen extends Piece {
     }
 
     chessMove(source, destination) {
-        let path = [], pathStart, pathEnd, incrementBy;
+        let path = [], start, end, increment;
         
         if (source > destination) {
-            pathStart = destination;
-            pathEnd = source;
+            start = destination;
+            end = source;
         } else {
-            pathStart = source;
-            pathEnd = destination;
+            start = source;
+            end = destination;
         }
 
         if (Math.abs(source - destination) % 8 === 0) {
-            incrementBy = 8;
-            pathStart += 8;
+            increment = 8;
+            start += 8;
         } else if (Math.abs(source - destination) % 9 === 0) {
-            incrementBy = 9;
-            pathStart += 9;
+            increment = 9;
+            start += 9;
         } else if (Math.abs(source - destination) % 7 === 0) {
-            incrementBy = 7;
-            pathStart += 7;
+            increment = 7;
+            start += 7;
         } else {
-            incrementBy = 1;
-            pathStart += 1;
+            increment = 1;
+            start += 1;
         }
 
-        for (let index = pathStart; index < pathEnd; index+=incrementBy) {
+        for (let index = start; index < end; index+=increment) {
             path.push(index)
         }
 
