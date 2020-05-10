@@ -16,12 +16,14 @@ class Board extends React.Component {
     }
 
     render() {
+        const ROWS = 12;
+        const COLUMNS = 10;
         const board = [];
-        for (let row = 0; row < 8; row++) {
+        for (let row = 0; row < ROWS; row++) {
             const rows = [];
-            for (let column = 0; column < 8; column++) {
+            for (let column = 0; column < COLUMNS; column++) {
                 const shade = (isEven(row) && isEven(column)) || (!isEven(row) && !isEven(column)) ? 'light-square' : 'dark-square';
-                rows.push(this.renderSquare((row * 8) + column, shade))
+                rows.push(this.renderSquare((row * ROWS) + column, shade))
             }
             board.push(<div key={row} className='board-row'>{rows}</div>)
         }
