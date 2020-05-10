@@ -9,7 +9,7 @@ export default class Bishop extends Piece {
     }
 
     isChessMove(source, destination) {
-        return (Math.abs(source - destination) % 9 === 0 || Math.abs(source - destination) % 7 === 0);
+        return (Math.abs(source - destination) % 11 === 0 || Math.abs(source - destination) % 9 === 0);
     }
 
     chessMove(source, destination) {
@@ -23,12 +23,12 @@ export default class Bishop extends Piece {
             end = destination;
         }
 
-        if (Math.abs(source - destination) % 9 === 0) {
+        if (Math.abs(source - destination) % 11 === 0) {
+            increment = 11;
+            start += 11;
+        } else {
             increment = 9;
             start += 9;
-        } else {
-            increment = 7;
-            start += 7;
         }
 
         for (let index = start; index < end; index+=increment) {
