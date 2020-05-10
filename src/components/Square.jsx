@@ -5,6 +5,7 @@ export default function Square(props) {
         <button className={`square ${props.shade}`}
             onClick={props.onClick}
             style={props.style}>
+            {/* {props.number} */}
         </button>
     )
 }

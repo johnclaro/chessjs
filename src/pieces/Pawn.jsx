@@ -8,8 +8,8 @@ class Pawn extends Piece {
     constructor(player) {
         super(player, (player === 1 ? WHITE_PAWN : BLACK_PAWN))
         this.initialPositions = {
-            1: [48, 49, 50, 51, 52, 53, 54, 55],
-            2: [8, 9, 10, 11, 12, 13, 14, 15]
+            1: [81, 82, 83, 84, 85, 86, 87, 88],
+            2: [31, 32, 33, 34, 35, 36, 37, 38]
         }
     }
 
@@ -18,10 +18,10 @@ class Pawn extends Piece {
         const black = this.player === 2;
 
         if (white) {
-            const advanceOneSquare = (destination === source - 8 && !enemyPiece)
-            const advanceTwoSquares =  (destination === source - 16 && this.initialPositions[1].indexOf(source) !== -1 && !enemyPiece)
-            const leftCapture = destination === source - 9
-            const rightCapture = destination === source - 7
+            const advanceOneSquare = (destination === source - 10 && !enemyPiece)
+            const advanceTwoSquares =  (destination === source - 20 && this.initialPositions[1].indexOf(source) !== -1 && !enemyPiece)
+            const leftCapture = destination === source - 11
+            const rightCapture = destination === source - 9
 
             if (advanceOneSquare || advanceTwoSquares) {
                 return true;
@@ -29,10 +29,10 @@ class Pawn extends Piece {
                 return true;
             }
         } else if (black) {
-            const advanceOneSquare = (destination === source + 8 && !enemyPiece);
-            const advanceTwoSquares = (destination === source + 16 && this.initialPositions[2].indexOf(source) !== 1 && !enemyPiece)
-            const leftCapture = destination === source + 9;
-            const rightCapture = destination === source + 7;
+            const advanceOneSquare = (destination === source + 10 && !enemyPiece);
+            const advanceTwoSquares = (destination === source + 20 && this.initialPositions[2].indexOf(source) !== -1 && !enemyPiece)
+            const leftCapture = destination === source + 11;
+            const rightCapture = destination === source + 9;
 
             if (advanceOneSquare || advanceTwoSquares) {
                 return true;
@@ -45,12 +45,12 @@ class Pawn extends Piece {
     }
 
     chessMove(source, destination) {
-        const whiteAdvanceTwoSquares = destination === source - 16;
-        const blackAdvanceTwoSquares = destination === source + 16;
+        const whiteAdvanceTwoSquares = destination === source - 20;
+        const blackAdvanceTwoSquares = destination === source + 20;
         if (whiteAdvanceTwoSquares) {
-            return [source - 8];
+            return [source - 10];
         } else if (blackAdvanceTwoSquares) {
-            return [source + 8];
+            return [source + 10];
         } else {
             return [];
         }

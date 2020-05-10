@@ -11,6 +11,7 @@ class Board extends React.Component {
             piece={this.props.board[index]}
             style={this.props.board[index] ? this.props.board[index].style : null}
             shade={shade}
+            number={index}
             onClick={() => this.props.onClick(index)}
         />
     }
@@ -23,7 +24,8 @@ class Board extends React.Component {
             const rows = [];
             for (let column = 0; column < COLUMNS; column++) {
                 const shade = (isEven(row) && isEven(column)) || (!isEven(row) && !isEven(column)) ? 'light-square' : 'dark-square';
-                rows.push(this.renderSquare((row * ROWS) + column, shade))
+                const index = (row * COLUMNS) + column;
+                rows.push(this.renderSquare(index, shade))
             }
             board.push(<div key={row} className='board-row'>{rows}</div>)
         }
