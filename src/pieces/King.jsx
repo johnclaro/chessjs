@@ -9,14 +9,15 @@ export default class King extends Piece {
     }
 
     isChessMove(source, destination) {
-        return (source - 9 === destination ||
-            source - 8 === destination ||
-            source - 7 === destination ||
-            source + 1 === destination ||
+        return (
+            source - 3 === destination ||
+            source - 9 === destination ||  
+            source - 10 === destination || 
+            source - 11 === destination ||
+            source + 3 === destination ||
             source + 9 === destination ||
-            source + 8 === destination ||
-            source + 7 === destination ||
-            source - 1 === destination    
+            source + 10 === destination ||
+            source + 11 === destination
         )
     }
 
