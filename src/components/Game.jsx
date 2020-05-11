@@ -90,7 +90,9 @@ class Game extends React.Component {
     isValidMove(move) {
         let isValid = true;
         for (let destination = 0; destination < move.length; destination++) {
-            if (this.state.board[move[destination]] !== null) {
+            const piece = move[destination];
+            console.log(piece);
+            if (this.state.board[piece] !== null) {
                 isValid = false;
             }
         }

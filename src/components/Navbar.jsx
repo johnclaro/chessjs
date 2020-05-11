@@ -10,7 +10,7 @@ class Navbar extends React.Component {
                     <div className='container'>
                         <Link to='/' className='mr-5' style={{fontSize: 30, fontWeight: 700, color: '#111'}}>
                             <img className='mb-1 mr-3' alt='logo.png' src='/logo.png' height='30' width='30'></img>
-                            upkeepo
+                            chess
                         </Link>
                         <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-content' aria-controls='navbar-content' aria-expanded='false' aria-label='Toggle navigation'>
                             <span className='navbar-toggler-icon'></span>

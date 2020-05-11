@@ -46,7 +46,7 @@ class Sidebar extends React.Component {
                 </nav>
                 <div id='sidebar-content'>
                     <nav className='navbar navbar-expand-lg navbar-light mt-3 mb-3' id='navbar'>
-                        <Link to='/demo' className='nav-item'> <i className='fas fa-globe mr-3'></i> <span>status.upkeepo.com</span></Link>
+                        <Link to='/demo' className='nav-item'> <i className='fas fa-globe mr-3'></i> <span>status.chess.com</span></Link>
                         <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-content' aria-controls='navbar-content' aria-expanded='false' aria-label='Toggle navigation'>
                             <span className='navbar-toggler-icon'></span>
                         </button>
@@ -84,13 +84,13 @@ class Sidebar extends React.Component {
                                 <i className='fas fa-question-circle sidebar--item-icon' data-toggle='dropdown'></i>
                                 <div className='dropdown-menu dropdown-menu-right'>
                                     <a href='/slack' className='dropdown-item'><i className='fab fa-slack mr-3'></i> Join our Slack</a>
-                                    <a href='mailto:john@upkeepo.com' className='dropdown-item'><i className='fas fa-paper-plane' style={{paddingRight: 14}}></i> Contact support</a>
+                                    <a href='mailto:john@chess.com' className='dropdown-item'><i className='fas fa-paper-plane' style={{paddingRight: 14}}></i> Contact support</a>
                                 </div>
                             </li>
                             <li className='nav-item nav-link dropdown my-auto dropdown-icon'>
                                 <i className='fas fa-user-circle sidebar--item-icon' data-toggle='dropdown'></i>
                                 <div className='dropdown-menu dropdown-menu-right'>
-                                    <div className='dropdown-header'>john@upkeepo.com</div>
+                                    <div className='dropdown-header'>john@chess.com</div>
                                     <div className='dropdown-header'>Administrator</div>
                                     <div className='dropdown-divider'></div>
                                     <Link to='/profile' className='dropdown-item'>Profile</Link>
