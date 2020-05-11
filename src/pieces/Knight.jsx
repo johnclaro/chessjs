@@ -10,15 +10,17 @@ export default class Knight extends Piece {
     }
 
     isChessMove(source, destination) {
-        return (source - 17 === destination ||
-            source - 10 === destination ||
-            source + 6 === destination ||
-            source + 15 === destination ||
-            source - 15 === destination ||
-            source - 6 === destination ||
-            source + 10 === destination ||
-            source + 17 === destination           
+        const move = (
+            source - 8 === destination ||
+            source - 12 === destination ||
+            source - 19 === destination ||
+            source - 21 === destination ||
+            source + 8 === destination ||
+            source + 12 === destination ||
+            source + 19 === destination ||
+            source + 21 === destination           
         )
+        return move 
     }
 
     chessMove() {
