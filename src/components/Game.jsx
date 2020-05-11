@@ -55,6 +55,7 @@ class Game extends React.Component {
                 const doesDestinationHaveEnemyPiece = piece ? true : false; 
                 const isChessMove = board[source].isChessMove(source, destination, doesDestinationHaveEnemyPiece);
                 const isValidMove = this.isValidMove(move);
+                const isCheckmate = this.isCheckmate(move);
         
                 if (isChessMove && isValidMove) {
                     if (piece !== null) {
@@ -88,11 +89,13 @@ class Game extends React.Component {
     }
 
     isValidMove(move) {
+        const { board } = this.state;
         let isValid = true;
         for (let destination = 0; destination < move.length; destination++) {
-            const piece = move[destination];
-            console.log(piece);
-            if (this.state.board[piece] !== null) {
+            const index = move[destination];
+            const piece = board[index];
+            if (piece !== null) {
+                const pieceType = piece.constructor.name;
                 isValid = false;
             }
         }
