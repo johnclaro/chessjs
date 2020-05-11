@@ -9,11 +9,11 @@ export default class Queen extends Piece {
     }
 
     isChessMove(source, destination) {
-        let modulo = source % 8;
-        let difference = 8 - modulo
+        let modulo = source % 10;
+        let difference = 10 - modulo
 
-        return (Math.abs(source - destination) % 9 === 0 || Math.abs(source - destination) % 7 === 0) ||
-            (Math.abs(source - destination) % 8 === 0 || (destination >= (source - modulo) && destination < (source + difference)))
+        return (Math.abs(source - destination) % 11 === 0 || Math.abs(source - destination) % 9 === 0) ||
+            (Math.abs(source - destination) % 10 === 0 || (destination >= (source - modulo) && destination < (source + difference)))
     }
 
     chessMove(source, destination) {
@@ -27,18 +27,18 @@ export default class Queen extends Piece {
             end = destination;
         }
 
-        if (Math.abs(source - destination) % 8 === 0) {
-            increment = 8;
-            start += 8;
+        if (Math.abs(source - destination) % 10 === 0) {
+            increment = 10;
+            start += 10;
+        } else if (Math.abs(source - destination) % 11 === 0) {
+            increment = 11;
+            start += 11;
         } else if (Math.abs(source - destination) % 9 === 0) {
             increment = 9;
             start += 9;
-        } else if (Math.abs(source - destination) % 7 === 0) {
-            increment = 7;
-            start += 7;
         } else {
-            increment = 1;
-            start += 1;
+            increment = 3;
+            start += 3;
         }
 
         for (let index = start; index < end; index+=increment) {
