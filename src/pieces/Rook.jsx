@@ -9,9 +9,9 @@ export default class Rook extends Piece {
     }
 
     isChessMove(source, destination) {
-        let modulo = source % 8;
-        let difference = 8 - modulo;
-        return (Math.abs(source - destination) % 8 === 0 || (destination >= (source - modulo) && destination < (source + difference)));
+        let modulo = source % 10;
+        let difference = 10 - modulo;
+        return (Math.abs(source - destination) % 10 === 0 || (destination >= (source - modulo) && destination < (source + difference)));
     }
 
     chessMove(source, destination) {
@@ -25,12 +25,12 @@ export default class Rook extends Piece {
             pathEnd = destination;
         }
 
-        if (Math.abs(source - destination) % 8 === 0) {
-            incrementBy = 8;
-            pathStart += 8;
+        if (Math.abs(source - destination) % 10 === 0) {
+            incrementBy = 10;
+            pathStart += 10;
         } else {
-            incrementBy = 1;
-            pathStart += 1;
+            incrementBy = 3;
+            pathStart += 3;
         }
 
         for (let index = pathStart; index < pathEnd; index += incrementBy) {
