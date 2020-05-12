@@ -23,7 +23,7 @@ export default class Knight extends Piece {
         return move 
     }
 
-    chessMove() {
+    getPiecesInTheWay() {
         return [];
     }
 }

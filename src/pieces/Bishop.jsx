@@ -12,7 +12,7 @@ export default class Bishop extends Piece {
         return (Math.abs(source - destination) % 11 === 0 || Math.abs(source - destination) % 9 === 0);
     }
 
-    chessMove(source, destination) {
+    getPiecesInTheWay(source, destination) {
         let path = [], start, end, increment;
 
         if (source > destination) {

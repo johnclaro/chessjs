@@ -21,7 +21,7 @@ export default class King extends Piece {
         )
     }
 
-    chessMove(source, destination) {
+    getPiecesInTheWay(source, destination) {
         return []
     }
 }

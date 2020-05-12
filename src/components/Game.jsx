@@ -51,11 +51,10 @@ class Game extends React.Component {
             } else {
                 const capturedWhites = this.state.capturedWhites.slice();
                 const capturedBlacks = this.state.capturedBlacks.slice();
-                const move = board[source].chessMove(source, destination);
-                const doesDestinationHaveEnemyPiece = piece ? true : false; 
-                const isChessMove = board[source].isChessMove(source, destination, doesDestinationHaveEnemyPiece);
-                const isValidMove = this.isValidMove(move);
-                const isCheckmate = this.isCheckmate(move);
+                const piecesInTheWay = board[source].getPiecesInTheWay(source, destination);
+                const isDestinationTaken = piece ? true : false; 
+                const isChessMove = board[source].isChessMove(source, destination, isDestinationTaken);
+                const isValidMove = this.isValidMove(piecesInTheWay);
         
                 if (isChessMove && isValidMove) {
                     if (piece !== null) {
@@ -88,12 +87,12 @@ class Game extends React.Component {
         }
     }
 
-    isValidMove(move) {
+    isValidMove(piecesInTheWay) {
         const { board } = this.state;
         let isValid = true;
-        for (let destination = 0; destination < move.length; destination++) {
-            const index = move[destination];
-            const piece = board[index];
+        for (let index = 0; index < piecesInTheWay.length; index++) {
+            const pieceInTheWay = piecesInTheWay[index];
+            const piece = board[pieceInTheWay];
             if (piece !== null) {
                 const pieceType = piece.constructor.name;
                 isValid = false;

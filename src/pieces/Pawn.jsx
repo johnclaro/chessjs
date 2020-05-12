@@ -44,7 +44,7 @@ class Pawn extends Piece {
         }
     }
 
-    chessMove(source, destination) {
+    getPiecesInTheWay(source, destination) {
         const whiteAdvanceTwoSquares = destination === source - 20;
         const blackAdvanceTwoSquares = destination === source + 20;
         if (whiteAdvanceTwoSquares) {

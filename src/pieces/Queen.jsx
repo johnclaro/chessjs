@@ -16,7 +16,7 @@ export default class Queen extends Piece {
             (Math.abs(source - destination) % 10 === 0 || (destination >= (source - modulo) && destination < (source + difference)))
     }
 
-    chessMove(source, destination) {
+    getPiecesInTheWay(source, destination) {
         let path = [], start, end, increment;
         
         if (source > destination) {

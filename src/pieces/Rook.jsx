@@ -14,7 +14,7 @@ export default class Rook extends Piece {
         return (Math.abs(source - destination) % 10 === 0 || (destination >= (source - modulo) && destination < (source + difference)));
     }
 
-    chessMove(source, destination) {
+    getPiecesInTheWay(source, destination) {
         let path = [], pathStart, pathEnd, incrementBy;
 
         if (source > destination) {
