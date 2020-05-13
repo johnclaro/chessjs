@@ -12,24 +12,26 @@ class Game extends React.Component {
             board: initBoard(),
             capturedWhites: [],
             capturedBlacks: [],
-            player: 1,
             source: -1,
             status: '',
-            turn: 'white',
+            current: {
+                player: 1,
+                turn: 'white'
+            }
         }
     }
 
     handleClick(destination) {
         const board = this.state.board.slice();
-        const { source } = this.state;
+        const { source, current } = this.state;
         const piece = board[destination];
         const chosenSource = source === -1;
         const validSource = source > -1;
 
         if (chosenSource) {
-            if (!piece || piece.player !== this.state.player) {
+            if (!piece || piece.player !== current.player) {
                 this.setState({
-                    status: `Wrong selection. Choose player ${this.state.player} pieces.`
+                    status: `Wrong selection. Choose player ${current.player} pieces.`
                 })
                 if (piece) {
                     piece.style = {...piece.style, backgroundColor: ''};
@@ -43,7 +45,7 @@ class Game extends React.Component {
             }
         } else if (validSource) {
             board[source].style = {...board[source].style, backgroundColor: ''};
-            if (piece && piece.player === this.state.player) {
+            if (piece && piece.player === current.player) {
                 this.setState({
                     status: 'Wrong selection. Choose valid source and destination again.',
                     source: -1
@@ -66,16 +68,18 @@ class Game extends React.Component {
                     }
                     board[destination] = board[source];
                     board[source] = null;
-                    let player = this.state.player === 1 ? 2 : 1;
-                    let turn = this.state.turn === 'white' ? 'black' : 'white';
+                    let nextPlayer = current.player === 1 ? 2 : 1;
+                    let nextTurn = current.turn === 'white' ? 'black' : 'white';
                     this.setState({
                         source: -1,
                         board: board,
                         status: '',
+                        current: {
+                            player: nextPlayer,
+                            turn: nextTurn
+                        },
                         capturedWhites,
-                        capturedBlacks,
-                        player,
-                        turn
+                        capturedBlacks
                     });
                 } else {
                     this.setState({
@@ -87,6 +91,10 @@ class Game extends React.Component {
         }
     }
 
+    scanForEnemyCheckmates() {
+        console.log('Scanning...'); 
+    }
+
     isValidMove(piecesInTheWay) {
         const { board } = this.state;
         let isValid = true;
@@ -94,7 +102,6 @@ class Game extends React.Component {
             const pieceInTheWay = piecesInTheWay[index];
             const piece = board[pieceInTheWay];
             if (piece !== null) {
-                const pieceType = piece.constructor.name;
                 isValid = false;
             }
         }
