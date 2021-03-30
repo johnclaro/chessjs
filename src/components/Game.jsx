@@ -119,8 +119,7 @@ class Game extends React.Component {
                         />
                     </div>
                     <div className='game-info'>
-                        <h3>Turn</h3>
-                        <div id='player-turn-box' style={{backgroundColor: this.state.turn}}></div>
+                        <h3 className='mt-3'>{this.state.current.turn}'s turn</h3>
                         <div className='game-status'>{this.state.status}</div>
                         <div className='captured-piece-block'>
                             {
